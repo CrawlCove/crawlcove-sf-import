@@ -1,0 +1,48 @@
+{
+  "name": "crawlcove-sf-import",
+  "version": "1.0.0",
+  "description": "Convert a Screaming Frog SEO Spider export (internal_all.csv / Internal tab export) into the Crawl Cove crawl export format, with a mapping report of what carried over and what did not.",
+  "type": "module",
+  "bin": {
+    "sf-import": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "seo",
+    "screaming-frog",
+    "screaming-frog-alternative",
+    "crawl-export",
+    "csv",
+    "import",
+    "cli",
+    "crawl-cove"
+  ],
+  "author": "Crawl Cove",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CrawlCove/crawlcove-sf-import.git"
+  },
+  "homepage": "https://crawlcove.com/screaming-frog-alternative?utm_source=github&utm_medium=crawlcove-sf-import",
+  "dependencies": {
+    "commander": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  }
+}

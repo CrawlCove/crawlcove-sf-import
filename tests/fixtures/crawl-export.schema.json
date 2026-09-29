@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/CrawlCove/crawlcove-export-spec/main/schema/crawl-export.schema.json",
+  "title": "Crawl Cove crawl export",
+  "description": "The full-crawl JSON export produced by the Crawl Cove desktop app's Reports page (one audit run, every crawled page). See ../docs/versioning.md for how schemaVersion changes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "exportedAt", "auditRunId", "runIncomplete", "pageCount", "pages"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "description": "Semver of this schema. Bumped on any added, renamed, or retyped field.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "exportedAt": {
+      "type": "string",
+      "description": "ISO 8601 timestamp of when the export was written.",
+      "format": "date-time"
+    },
+    "auditRunId": {
+      "type": "integer",
+      "description": "The audit run this export was generated from."
+    },
+    "runIncomplete": {
+      "type": "boolean",
+      "description": "True when the run had not finished crawling at export time — the page list may be a partial crawl."
+    },
+    "pageCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of entries in `pages`."
+    },
+    "pages": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/page" }
+    }
+  },
+  "$defs": {
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "finalUrl",
+        "statusCode",
+        "contentType",
+        "depth",
+        "indexable",
+        "title",
+        "titleLength",
+        "metaDescription",
+        "metaLength",
+        "canonical",
+        "htmlLang",
+        "robotsMeta",
+        "xRobotsTag",
+        "h1Count",
+        "wordCount",
+        "linksInternal",
+        "linksExternal",
+        "imageCount",
+        "imagesMissingAlt",
+        "responseTimeMs",
+        "byteSize",
+        "rendered",
+        "redirectHops",
+        "fetchError",
+        "schemaBlocks",
+        "hreflangCount",
+        "contentFingerprint",
+        "findingsCount"
+      ],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "description": "The URL as requested." },
+        "finalUrl": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "The URL after following redirects, or null if not recorded."
+        },
+        "statusCode": {
+          "type": ["integer", "null"],
+          "description": "HTTP status code of the final response, or null if the request never got one (e.g. a fetch error)."
+        },
+        "contentType": { "type": ["string", "null"] },
+        "depth": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Crawl depth from the start URL (0 = start URL)."
+        },
+        "indexable": {
+          "type": "boolean",
+          "description": "Derived: HTTP 200 and not noindex, by robots meta OR the X-Robots-Tag response header."
+        },
+        "title": { "type": ["string", "null"] },
+        "titleLength": { "type": ["integer", "null"], "minimum": 0 },
+        "metaDescription": { "type": ["string", "null"] },
+        "metaLength": { "type": ["integer", "null"], "minimum": 0 },
+        "canonical": { "type": ["string", "null"] },
+        "htmlLang": { "type": ["string", "null"] },
+        "robotsMeta": {
+          "type": ["string", "null"],
+          "description": "Raw <meta name=\"robots\"> content attribute, or null if absent."
+        },
+        "xRobotsTag": {
+          "type": ["string", "null"],
+          "description": "Raw X-Robots-Tag response header, or null if absent — the other source of a noindex."
+        },
+        "h1Count": { "type": ["integer", "null"], "minimum": 0 },
+        "wordCount": { "type": ["integer", "null"], "minimum": 0 },
+        "linksInternal": { "type": ["integer", "null"], "minimum": 0 },
+        "linksExternal": { "type": ["integer", "null"], "minimum": 0 },
+        "imageCount": { "type": ["integer", "null"], "minimum": 0 },
+        "imagesMissingAlt": { "type": ["integer", "null"], "minimum": 0 },
+        "responseTimeMs": { "type": ["integer", "null"], "minimum": 0 },
+        "byteSize": { "type": ["integer", "null"], "minimum": 0 },
+        "rendered": {
+          "type": "boolean",
+          "description": "True if the page was fetched with a JS-rendering pass rather than the plain HTTP response."
+        },
+        "redirectHops": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of redirect hops the URL went through (0 = none)."
+        },
+        "fetchError": {
+          "type": ["string", "null"],
+          "description": "Network/fetch-level error (e.g. a timeout code), or null if the request completed."
+        },
+        "schemaBlocks": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of JSON-LD schema.org blocks found on the page."
+        },
+        "hreflangCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of <link rel=\"alternate\" hreflang> entries."
+        },
+        "contentFingerprint": {
+          "type": "string",
+          "description": "64-bit content fingerprint as a hex string, or an empty string when the page had too little content to fingerprint."
+        },
+        "findingsCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of SEO findings attributed to this page in the run."
+        }
+      }
+    }
+  }
+}
