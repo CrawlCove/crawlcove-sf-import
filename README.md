@@ -101,6 +101,7 @@ This converts a Frog export. [Crawl Cove](https://crawlcove.com/?utm_source=gith
 
 ## Related tools
 
+- [crawlcove-js](https://github.com/CrawlCove/crawlcove-js) — `crawlcove-export`, a typed JavaScript/TypeScript library to load, query and convert Crawl Cove exports.
 - [crawlcove-sheets](https://github.com/CrawlCove/crawlcove-sheets) — Google Sheets add-on that turns a Crawl Cove export into an audit workbook (issues by type, pages by status, title/meta flags).
 - [crawlcove-export-spec](https://github.com/CrawlCove/crawlcove-export-spec) — the JSON Schema this tool's output validates against.
 - [crawlcove-mcp](https://github.com/CrawlCove/crawlcove-mcp) — load the converted export into Claude, Cursor and other AI assistants.
