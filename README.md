@@ -99,6 +99,8 @@ A Frog configuration file is Java serialisation, not a text format, and this too
 
 This converts a Frog export. [Crawl Cove](https://crawlcove.com/?utm_source=github&utm_medium=crawlcove-sf-import), the desktop SEO crawler for Windows and Mac, produces this format natively, runs its checks on every page, ranks fixes by impact, and keeps history over time.
 
+This repo has its own page on crawlcove.com: [Crawl Cove Screaming Frog importer](https://crawlcove.com/open-source/crawlcove-sf-import?utm_source=github&utm_medium=crawlcove-sf-import).
+
 ## Related tools
 
 - [crawlcove-js](https://github.com/CrawlCove/crawlcove-js) — `crawlcove-export`, a typed JavaScript/TypeScript library to load, query and convert Crawl Cove exports.
